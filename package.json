@@ -1,0 +1,21 @@
+{
+  "name": "masterclass",
+  "version": "1.0.0",
+  "description": "\"#paragons2\"",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/whisper-199/paragons2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/whisper-199/paragons2/issues"
+  },
+  "homepage": "https://github.com/whisper-199/paragons2#readme"
+}
