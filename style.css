@@ -1,77 +1,188 @@
-/* GENERAL PAGE STYLE */
 :root {
     --crimson: #A51C30;
     --navy: #012169;
     --gold: #FFD700;
     --cream: #F9F6EE;
 }
+
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Georgia', sans-serif;
-    background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
-    background-attachment: fixed;
-    color: #333;
+    font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(-45deg, #89f7fe, #66a6ff, #fbc2eb, #fad0c4);
+    background-size: 400% 400%;
+    animation: gradientBG 12s ease infinite;
+    color: #222;
+    min-height: 100vh;
 }
-h1{
+
+@keyframes gradientBG {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+h1 {
     font-size: 2.5rem;
     text-align: center;
-    MARGIN: 10px 0;
+    margin: 10px 0;
 }
+
 @media (max-width: 600px) {
     h1 {
-      font-size: 1.5rem;
-  }
+        font-size: 1.5rem;
+    }
 }
-h1,h2,h3 {
+
+h1, h2, h3 {
     margin-top: 20px;
     margin-bottom: 10px;
 }
+
 .subtitle {
     font-style: italic;
     margin-top: 0.5rem;
 }
+
 /* HEADER AND NAVIGATION */
 header {
-    background-color: #003366;
-    color: white;
+    background: rgba(0, 51, 102, 0.85);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 8px 32px 0 rgba(31,38,135,0.37);
+    border-bottom: 2px solid #fff3;
     padding-bottom: 20px;
-    box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
     position: sticky;
     top: 0;
     z-index: 100;
+    transition: transform 0.3s;
 }
 
+/* NAVBAR: Compact, Always Horizontal, Responsive */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 50px;
-    background-color: #002244;
-}
-
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-    letter-spacing: 2px;
+    padding: 8px 18px;
+    background: transparent;
+    box-shadow: none;
+    min-height: 48px;
 }
 
 nav ul {
     list-style: none;
     display: flex;
-    gap: 25px;
+    flex-direction: row; /* Always horizontal */
+    gap: 6px;
     margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Responsive: Reduce padding and font size on small screens */
+@media (max-width: 600px) {
+    .navbar {
+        flex-direction: row;
+        align-items: center;
+        padding: 4px 4vw;
+        min-height: 40px;
+    }
+    nav ul {
+        flex-direction: row;
+        gap: 2px;
+    }
+    nav ul li a {
+        font-size: 0.95rem;
+        padding: 4px 10px;
+    }
+    .logo {
+        font-size: 1.1rem;
+        margin-bottom: 0;
+    }
 }
 
 nav ul li a {
+    position: relative;
     color: white;
     text-decoration: none;
-    font-size: 16px;
-    transition: color 0.3s;
+    font-size: 1.1rem;
+    padding: 6px 18px;
+    border-radius: 20px;
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
 }
 
-nav ul li a:hover {
-    color: #66a6ff;
+nav ul li a:hover, nav ul li a.active {
+    background: var(--gold);
+    color: #003366;
+    box-shadow: 0 0 10px var(--gold), 0 0 20px #fff7;
+}
+
+/* Floating User Badge */
+#userNav {
+    background: linear-gradient(90deg, var(--gold), #fffbe6);
+    color: #003366;
+    font-weight: bold;
+    border-radius: 20px;
+    padding: 4px 18px;
+    margin-left: 10px;
+    box-shadow: 0 2px 8px #ffd70055;
+    animation: floatBadge 2.5s infinite alternate;
+}
+
+@keyframes floatBadge {
+    to { transform: translateY(-4px) scale(1.05);}
+}
+
+/* AUTH FORMS */
+.auth-form, .profile-form {
+    background: rgba(255,255,255,0.85);
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 500px;
+    margin: 30px auto;
+    box-shadow: 0 8px 32px 0 rgba(31,38,135,0.17), 0 0 18px #ffd70022;
+    border: 2px solid #fff3;
+    transition: box-shadow 0.3s;
+}
+
+.auth-form h2, .profile-form h2 {
+    text-align: center;
+    color: var(--navy);
+}
+
+.auth-form input, .profile-form input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.auth-form input:focus, .profile-form input:focus {
+    border: 2px solid var(--gold);
+    box-shadow: 0 0 10px #ffd70055;
+}
+
+.auth-form button, .profile-form button {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    background: linear-gradient(90deg, var(--navy), var(--gold));
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.auth-form button:hover, .profile-form button:hover {
+    background: linear-gradient(90deg, var(--gold), var(--navy));
+    box-shadow: 0 0 18px #ffd70099;
 }
 
 /* MAIN TITLE */
@@ -82,19 +193,39 @@ h1 {
 
 /* SEARCH BAR */
 #searchInput {
-    margin-top: 15px;
+    margin: 15px auto;
     padding: 12px 20px;
     width: 60%;
     max-width: 500px;
     border: none;
     border-radius: 30px;
     font-size: 16px;
+    display: block;
     outline: none;
     transition: 0.3s;
+    box-shadow: 0 0 0px #66a6ff;
 }
 
 #searchInput:focus {
-    box-shadow: 0px 0px 10px #66a6ff;
+    box-shadow: 0 0 18px #66a6ff, 0 0 8px #fff;
+    border: 2px solid var(--gold);
+}
+
+/* HERO SECTION ANIMATION */
+.hero {
+    background: rgba(255,255,255,0.15);
+    border-radius: 18px;
+    margin: 30px auto 0 auto;
+    max-width: 600px;
+    padding: 32px 24px;
+    box-shadow: 0 8px 32px 0 rgba(31,38,135,0.17);
+    text-align: center;
+    animation: fadeInDown 1.2s;
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-40px);}
+    to { opacity: 1; transform: translateY(0);}
 }
 
 /* CARD CONTAINER */
@@ -103,45 +234,44 @@ h1 {
     flex-wrap: wrap;
     justify-content: center;
     padding: 40px;
+    gap: 20px;
 }
 
 /* CARD STYLE */
 .card {
     width: 250px;
     height: 350px;
-    margin: 20px;
     perspective: 1000px;
     border-radius: 15px;
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255,255,255,0.18);
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
-    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease-in-out;
-    border: 2px solid #ffffff33; /*white with a slice transparency */
-    border-radius: 15px;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur (10px);
-    transition: transform  0.3s ease,box-shadow 0.3s ease;
+    box-shadow: 0 8px 32px 0 rgba(31,38,135,0.17), 0 0 0px #ffd700;
+    transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
+    position: relative;
+    overflow: visible;
+    border: 2px solid rgba(255,255,255,0.25);
 }
 
 .card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0px 10px 25px rgba(0,0,0,0.3);
+    transform: scale(1.06) translateY(-12px) rotateZ(-1deg);
+    box-shadow: 0 16px 40px 0 #ffd70055, 0 0 30px #fff7;
+    border: 2px solid var(--gold);
+    z-index: 2;
 }
 
 .inner-card {
     width: 100%;
     height: 100%;
-    transition: transform 0.8s;
+    transition: transform 0.8s cubic-bezier(.4,2,.6,1);
     transform-style: preserve-3d;
     position: relative;
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 .card:hover .inner-card {
-    transform: rotateY(180deg);
+    transform: rotateY(180deg) scale(1.04);
 }
 
 .front, .back {
@@ -152,9 +282,14 @@ h1 {
     border-radius: 15px;
     overflow: hidden;
 }
-.font {
-    background: white;
+
+.front {
+    background: rgba(255,255,255,0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
 .front img {
     width: 100%;
     height: 100%;
@@ -162,8 +297,9 @@ h1 {
 }
 
 .back {
-    background: #003366;
-    color: white;
+    background: linear-gradient(135deg, #003366 60%, #012169 100%);
+    color: #fff;
+    border-top: 2px solid var(--gold);
     transform: rotateY(180deg);
     display: flex;
     flex-direction: column;
@@ -171,16 +307,6 @@ h1 {
     justify-content: center;
     padding: 20px;
     text-align: center;
-}
-
-.back h3 {
-    margin-bottom: 10px;
-    font-size: 24px;
-}
-
-.back p {
-    font-size: 16px;
-    margin-bottom: 20px;
 }
 
 /* SOCIAL BUTTONS */
@@ -196,17 +322,19 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #25D366;
-    padding: 10px 15px;
+    padding: 8px 12px;
     border-radius: 30px;
     color: white;
-    font-weight: bold;
+    font-weight: 600;
     text-decoration: none;
-    transition: background-color 0.3s;
+    font-size: 1.05rem;
+    transition: box-shadow 0.3s, border 0.3s, transform 0.2s;
+    box-shadow: 0 0 8px #fff7;
+    border: 1.5px solid #fff3;
 }
 
 .social-link i {
-    margin-right: 8px;
+    margin-right: 5px;
 }
 
 .social-link.whatsapp {
@@ -225,17 +353,173 @@ h1 {
     background-color: #C13584;
 }
 
+.social-link.twitter {
+    background-color: #1DA1F2;
+}
+
+.social-link.twitter:hover {
+    background-color: #0d8ecf;
+}
+
+.social-link:hover {
+    box-shadow: 0 0 18px #fff, 0 0 8px var(--gold);
+    border: 1.5px solid var(--gold);
+    transform: scale(1.08);
+}
+
+/* FOOTER */
+footer {
+    background-color: #003366;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+}
+
+.copyright {
+    font-size: 14px;
+    opacity: 0.8;
+}
+
 /* RESPONSIVE DESIGN */
 @media screen and (max-width: 768px) {
     .navbar {
         flex-direction: column;
+        align-items: flex-start;
+        padding: 8px 8px;
     }
     nav ul {
-        flex-direction: column;
-        gap: 10px;
-        margin-top: 10px;
+        flex-direction: row; /* Keep horizontal on mobile */
+        gap: 6px;
+        width: 100%;
+        justify-content: flex-start;
     }
-    #searchInput {
-        width: 80%;
+    .logo {
+        font-size: 1.2rem;
+        margin-bottom: 4px;
     }
+}
+
+@media (max-width: 600px) {
+    .hero { padding: 18px 8px; }
+    .container { padding: 10px; }
+    .card { max-width: 95vw; }
+    .logo { font-size: 1.3rem; }
+    .navbar {
+        flex-direction: row;
+        align-items: center;
+        padding: 4px 4vw;
+        min-height: 40px;
+    }
+    nav ul {
+        flex-direction: row;
+        gap: 2px;
+    }
+    nav ul li a {
+        font-size: 0.95rem;
+        padding: 4px 10px;
+    }
+}
+
+/* LOADING INDICATOR */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    border-top-color: var(--gold);
+    animation: spin 1s ease-in-out infinite;
+    margin-right: 10px;
+    box-shadow: 0 0 10px #ffd70099;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+.confetti {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
+}
+/* --- SUPERCHARGED DYNAMIC EFFECTS --- */
+
+/* Neon border and badge for your own card */
+.card[style*="var(--gold)"]::after {
+    content: "★ YOU";
+    position: absolute;
+    top: -18px; right: -18px;
+    background: var(--gold);
+    color: #003366;
+    font-weight: bold;
+    font-size: 0.95rem;
+    padding: 4px 12px;
+    border-radius: 20px;
+    box-shadow: 0 2px 8px #ffd70099;
+    animation: badgePop 1.5s infinite alternate;
+    z-index: 10;
+}
+@keyframes badgePop {
+    to { transform: scale(1.12);}
+}
+
+/* Glassy, glowing effect for cards */
+.card {
+    box-shadow: 0 8px 32px 0 rgba(31,38,135,0.27), 0 0 24px #ffd70033;
+    border: 2.5px solid rgba(255,255,255,0.35);
+    background: rgba(255,255,255,0.22);
+    backdrop-filter: blur(14px);
+    transition: box-shadow 0.4s, border 0.4s, transform 0.4s;
+}
+.card:hover {
+    box-shadow: 0 16px 40px 0 #ffd70099, 0 0 40px #fff7;
+    border: 2.5px solid var(--gold);
+    transform: scale(1.09) translateY(-16px) rotateZ(-2deg);
+}
+
+/* Animated glowing border for the search bar */
+#searchInput {
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    box-shadow: 0 0 0px #66a6ff;
+    transition: box-shadow 0.4s, border 0.4s;
+}
+#searchInput:focus {
+    border: 2px solid var(--gold);
+    box-shadow: 0 0 24px #ffd70099, 0 0 8px #fff;
+}
+
+/* Animated gradient underline for nav links on hover */
+nav ul li a::after {
+    content: "";
+    display: block;
+    height: 3px;
+    width: 0;
+    background: linear-gradient(90deg, var(--gold), var(--navy));
+    border-radius: 2px;
+    transition: width 0.4s;
+    margin: 0 auto;
+}
+nav ul li a:hover::after, nav ul li a.active::after {
+    width: 80%;
+}
+
+/* Subtle floating animation for cards */
+@media (min-width: 600px) {
+    .card {
+        animation: floatCard 4s ease-in-out infinite alternate;
+    }
+    @keyframes floatCard {
+        0% { transform: translateY(0);}
+        100% { transform: translateY(-8px);}
+    }
+}
+
+/* Confetti effect on profile save (optional, needs JS) */
+.confetti {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 9999;
 }
